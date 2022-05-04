@@ -26,3 +26,43 @@ We can execute it when a variable or state is updated.
     }, [variables that we want useeffect to detect when it is executed again])
     </code>
 </pre>
+
+### 3. **React Components**
+Class components has to main concepts: 
+
+  1) Constructor
+   2) this
+
+   - Each React Component must have a render function.
+   - A class can have as many functions as needed, but the render function in a React component is the only function that is required. You make the render function return the virtual DOM description of your Component.
+   - Instead of receiving props as arguments, in class components, both the props and the state are managed on an instance of the class and each instance of the class that you create gets its props and state.
+```js script
+    class App extends React.Component {
+
+     render() {
+        return (
+            <div>
+                <div>{this.props.title}</div>
+                <Card/>
+            </div>
+            );
+        }
+    } 
+```
+
+   - For multiline (meaning having multiples components call in one) return should have parenthesis and be wrapped between  
+   **`<div> `**<br />
+      &nbsp; &nbsp;`<ComponentOne/>`<br />
+      &nbsp; &nbsp;`<ComponentTwo/>`<br />
+      **`</div>`**  
+   or   
+   **`<React.Fragment>`**<br />
+      &nbsp;&nbsp;` <ComponentOne/>`<br />
+      &nbsp;&nbsp;` <ComponentTwo/>`<br />
+      **` </React.Fragment>`** 
+
+     or   
+   **`<>`**<br />
+      &nbsp;&nbsp;` <ComponentOne/>`<br />
+      &nbsp;&nbsp;` <ComponentTwo/>`<br />
+   **`</>`**
