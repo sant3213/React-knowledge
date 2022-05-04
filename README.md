@@ -28,7 +28,7 @@ We can execute it when a variable or state is updated.
 </pre>
 
 ### 3. **React Components**
-Class components has to main concepts: 
+Class components has two main concepts: 
 
   1) Constructor
    2) this
@@ -36,6 +36,23 @@ Class components has to main concepts:
    - Each React Component must have a render function.
    - A class can have as many functions as needed, but the render function in a React component is the only function that is required. You make the render function return the virtual DOM description of your Component.
    - Instead of receiving props as arguments, in class components, both the props and the state are managed on an instance of the class and each instance of the class that you create gets its props and state.
+
+**index.js file**
+```js script
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import App from './App';
+import reportWebVitals from './reportWebVitals';
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>
+    <App title='React class component title'/>
+  </React.StrictMode>
+);
+```
+   **App.js file**
 ```js script
     class App extends React.Component {
 
