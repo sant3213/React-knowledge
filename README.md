@@ -3,7 +3,6 @@
 ## Hooks
 
 ### 1. **Usestate()**
-        <p>
         useState returns a pair: the current state value and a function the that  allows you to update it.
 
         The only argument for useState() is the initial state.
@@ -14,7 +13,7 @@
 
         a) state object
         b) updater function (setter)
-        </p>
+        
 ### 2. **Effect**
 
 It is executed when the component has been mounted. It cannot be executed before the component is mounted.
