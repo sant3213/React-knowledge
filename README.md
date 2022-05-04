@@ -83,3 +83,10 @@ root.render(
       &nbsp;&nbsp;` <ComponentOne/>`<br />
       &nbsp;&nbsp;` <ComponentTwo/>`<br />
    **`</>`**
+   
+- To iterate creating Components, it can be done with:
+```js script
+{ arrayData.map( profile => 
+      <Card {...profile}/>
+    )}
+```
