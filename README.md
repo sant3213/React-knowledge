@@ -17,7 +17,7 @@
         </p>
 ### 2. **Effect**
 
-It executed when the component has been mounted. I cannot be executed before the component is mounted.
+It is executed when the component has been mounted. It cannot be executed before the component is mounted.
 
 We can execute it when a variable or state is updated.
 <pre>
