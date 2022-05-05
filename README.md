@@ -1,70 +1,95 @@
-# Getting Started with Create React App
+# react-knowledge
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Hooks
 
-## Available Scripts
+### 1. **Usestate()**
+        <p>
+        useState returns a pair: the current state value and a function the that  allows you to update it.
 
-In the project directory, you can run:
+        The only argument for useState() is the initial state.
 
-### `npm start`
+        The inital value is set useState(0);
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+        You can use the State Hook more than once on the same component:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+        a) state object
+        b) updater function (setter)
+        </p>
+### 2. **Effect**
 
-### `npm test`
+It executed when the component has been mounted. I cannot be executed before the component is mounted.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+We can execute it when a variable or state is updated.
+<pre>
+    <code>
+    useEffect(()=> {
+        // ...code to execute...
+    }, [variables that we want useeffect to detect when it is executed again])
+    </code>
+</pre>
 
-### `npm run build`
+### 3. **React Components**
+Class components has two main concepts: 
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+  1) Constructor
+   2) this
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+   - Each React Component must have a render function.
+   - A class can have as many functions as needed, but the render function in a React component is the only function that is required. You make the render function return the virtual DOM description of your Component.
+   - Instead of receiving props as arguments, in class components, both the props and the state are managed on an instance of the class and each instance of the class that you create gets its props and state.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+**index.js file**
+```js script
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import App from './App';
+import reportWebVitals from './reportWebVitals';
 
-### `npm run eject`
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>
+    <App title='React class component title'/>
+  </React.StrictMode>
+);
+```
+   **App.js file**
+```js script
+    class App extends React.Component {
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+     render() {
+        return (
+            <div>
+                <div>{this.props.title}</div>
+                <Card/>
+            </div>
+            );
+        }
+    } 
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+   - For multiline (meaning having multiples components call in one) return should have parenthesis and be wrapped between  
+   **`<div> `**<br />
+      &nbsp; &nbsp;`<ComponentOne/>`<br />
+      &nbsp; &nbsp;`<ComponentTwo/>`<br />
+      **`</div>`**  
+   or   
+   **`<React.Fragment>`**<br />
+      &nbsp;&nbsp;` <ComponentOne/>`<br />
+      &nbsp;&nbsp;` <ComponentTwo/>`<br />
+      **` </React.Fragment>`** 
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+     or   
+   **`<>`**<br />
+      &nbsp;&nbsp;` <ComponentOne/>`<br />
+      &nbsp;&nbsp;` <ComponentTwo/>`<br />
+   **`</>`**
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+  
+- To iterate creating Components, it can be done with:
+```js script
+  { props.profiles.map((profile, i) => (
+      <Card {...profile} key={i} />
+    ))}
+```
+ &nbsp; &nbsp; &nbsp; &nbsp; This is the as doing  **`[<Card/>, <Card/>] `** and **`[React.createElement(), React.createElement()]`** 
