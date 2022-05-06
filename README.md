@@ -1,8 +1,6 @@
 # react-knowledge
 
-## Hooks
-
-### 1. **Usestate()**
+### 1. **useState()**
         <p>
         useState returns a pair: the current state value and a function the that  allows you to update it.
 
@@ -15,9 +13,53 @@
         a) state object
         b) updater function (setter)
         </p>
+
+- In a class component, the state is algo managed on the in-memory instance that React associates with every mounted component. To initialize s state object for the App component, we need to tap into the native class constructor method, which gets called for every instantiated object. 
+This specual constructor method receives the instance props as well, it has to call the javascript super() method. Super() method is needed to honor the link between the App class and the class that it extends from (React.Component). You should always pass the props object to the super method.
+
+
+```js script
+     constructor(props) {
+          super(props);
+      }
+```
+
+- Once inside the constructor, we have access to the special state object that React manages for each class component.
+
+```js script
+class App extends Reac.Component {
+     constructor(props) {
+          super(props);
+          this.state = {
+            profiles: testData
+          }; //it has to be an object in class components
+      }
+      render() {
+        return (
+          <div>
+          <div>{this.props.title}</div>
+          <Form/>
+          <CardList profiles={this.state.profiles}/>
+        )
+      }
+}
+```
+- We can usa another syntax without using the constructor call:
+
+```js script
+class App extends Reac.Component {
+     state = {
+       profiles: testData
+     };
+      render() {
+        ...
+      }
+
+```
+
 ### 2. **Effect**
 
-It executed when the component has been mounted. I cannot be executed before the component is mounted.
+It is executed when the component has been mounted. I cannot be executed before the component is mounted.
 
 We can execute it when a variable or state is updated.
 <pre>
@@ -93,3 +135,57 @@ root.render(
     ))}
 ```
  &nbsp; &nbsp; &nbsp; &nbsp; This is the as doing  **`[<Card/>, <Card/>] `** and **`[React.createElement(), React.createElement()]`** 
+
+ ### 3. **Forms**
+- One way of getting the value from an input is using **ref={}** property from React. It is used to get a reference from the DOM element. React keeps it in-memory and asscociates with every rendered element.
+It is initialized with **variableName = React.creatRef();**.
+To get the value we use **variableName.current.value**.
+
+```js script
+ class Form extends React.Component {
+  userNameInput = React.createRef();
+  handleSubmit = (event) => {
+    event.preventDefault(); // Avoid refreshing the page when submitting
+    console.log(this.userNameInput.current.value)
+  };
+  render() {
+    return (
+      <form className="form" onSubmit={this.handleSubmit}>
+        <input
+          type="text"
+          placeholder="testing input"
+          ref={this.userNameInput}
+        ></input>
+        <button>Add input value</button>
+      </form>
+    );
+  }
+}
+```
+
+- This is another method to get the values to control their values directly through React itself, rather than reading it from the DOM elements. It has more advantages over the simple ref property.
+The benefict of using it it that React is aware of this state change for every single character, while previously React was not aware of what was being typed in the input box.
+This method is valuable if you need to provide some kind of feedback for the user as the user is typing. For example: Password strength indicator or email validator.
+
+```js script
+class Form extends React.Component {
+  state = { userName: ''}
+  handleSubmit = (event) => {
+    event.preventDefault(); // Avoid refreshing the page when submitting
+    console.log(this.state.userName)
+  };
+  render() {
+    return (
+      <form className="form" onSubmit={this.handleSubmit}>
+        <input
+          type="text"
+          placeholder="testing input"
+          value={this.state.userName}
+          onChange={event => this.setState({userName: event.target.value})}
+        ></input>
+        <button>Add input value</button>
+      </form>
+    );
+  }
+}
+```
